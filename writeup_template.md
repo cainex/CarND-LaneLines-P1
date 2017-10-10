@@ -13,15 +13,27 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/grayscale.jpg "Grayscale"
+[solidWhiteCurve]: ./test_images/solidWhiteCurve.jpg
+[solidWhiteRight]: ./test_images/solidWhiteRight.jpg
+[solidYellowCurve]: ./test_images/solidYellowCurve.jpg
+[solidYellowCurve2]: ./test_images/solidYellowCurve2.jpg
+[solidYellowLeft]: ./test_images/solidYellowLeft.jpg
+[whiteCarLaneSwitch]: ./test_images/whiteCarLaneSwitch.jpg
+
+[solidWhiteCurveFound]: ./test_images_output/solidWhiteCurve.png
+[solidWhiteRightFound]: ./test_images_output/solidWhiteRight.png
+[solidYellowCurveFound]: ./test_images_output/solidYellowCurve.png
+[solidYellowCurve2Found]: ./test_images_output/solidYellowCurve2.png
+[solidYellowLeftFound]: ./test_images_output/solidYellowLeft.png
+[whiteCarLaneSwitchFound]: ./test_images_output/whiteCarLaneSwitch.png
 
 ---
 
 ### Reflection
 
-### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
+### 1. Pipeline description
 
-The lane finding pipeline is comprised of 5 stages:
+The lane finding pipeline is comprised of 6 stages:
 
 1. Convert input image to grayscale
 
@@ -107,7 +119,33 @@ The lane finding pipeline is comprised of 5 stages:
    This stage is fairly simple, we just composite the resulting lane line image onto the original image using the proivided weighted_img() function.
 
 
-![alt text][image1]
+Pipeline run on test images:
+
+SolidWhiteCurve
+
+![alt text][solidWhiteCurveFound]
+
+SolidWhiteRight
+
+![alt text][solidWhiteRightFound]
+
+solidYellowCurve
+
+![alt text][solidYellowCurveFound]
+
+solidYellowCurve2
+
+![alt text][solidYellowCurve2Found]
+
+solidYellowLeft
+
+![alt text][solidYellowLeftFound]
+
+whiteCareLaneSwitch
+
+![alt text][whiteCarLaneSwitchFound]
+
+Video output can be found in test_videos_output/
 
 
 ### 2. Identify potential shortcomings with your current pipeline
