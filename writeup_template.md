@@ -123,8 +123,7 @@ Pipeline run on test images:
 
 SolidWhiteCurve
 
-![alt text][solidWhiteCurveFound    result = weighted_img(region_of_interest(hough_img,vertices), image)
-]
+![alt text][solidWhiteCurveFound]
 
 SolidWhiteRight
 
@@ -178,6 +177,6 @@ I believe there are a few shortcomings with the current pipeline:
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+   1. Processing time
 
-Another potential improvement could be to ...
+      Because this is implemented as a pipeline, I believe the pipe stages could be processed in parallel. This would incur an initial latency for the first lane lines to be 
