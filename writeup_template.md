@@ -123,7 +123,8 @@ Pipeline run on test images:
 
 SolidWhiteCurve
 
-![alt text][solidWhiteCurveFound]
+![alt text][solidWhiteCurveFound    result = weighted_img(region_of_interest(hough_img,vertices), image)
+]
 
 SolidWhiteRight
 
@@ -151,10 +152,29 @@ Video output can be found in test_videos_output/
 ### 2. Identify potential shortcomings with your current pipeline
 
 
-One potential shortcoming would be what would happen when ... 
+I believe there are a few shortcomings with the current pipeline:
 
-Another shortcoming could be ...
+   1. Processing time
+   
+      The processing of a single frame needs to pass through the entire pipeline before the next frame can be processed. This causes the processing of the input data to occur slower than real-time (24fps or 30fps). The implication is that if deployed, likely there would be a significant amount of frames dropped.
 
+      Given that this algorithm saves previous frames in a FIFO and assumes that there isn't a large deviation of the lane line between frames, large numbers of dropped frames could cause issues with this assumption.
+
+   2. Susceptible to loss of lane
+
+      There are two possible issues with losing the lane. First, we have made an assumption of where the lanes lines are likely to be and masked off data which is outside that region. If for some reason, the lane lines shift out of this region, we will no longer detect that lane line.
+
+      Additionally, with this particular implementation, the lane line information for "garbage frames" is not stored in the history. If the lane line drops out for several frames, it may be difficult for the current implementation to re-track the lane line. This can be seen when the left lane in the challenge video breifly drops out, and is later reaquired, but several frames pass before the reacquisition occurs.
+
+   3. Predicting lines not curves
+
+      Using this method, we are detecting lane lines, however, real lanes often curve to the left or right. This method works well for highway scenarios where turns are very gradual, but I think it would suffer for windy roads that had more frequently and more severe turns.
+
+   4. Reliance on painted lane lines
+
+      Detecting the lane lines works well when the lane lines are correctly and clearly painted on the road. This is often not the case on secondary roads, which may not have lane lines painted, construction zones, which may have inaccurate or missing lane lines, or older roads where the painted lines may be obscured or partially missing. 
+
+      I would suspect this also has some shortcomings when the lane forks or splits as it would for an exit/entrance ramp on the highway.
 
 ### 3. Suggest possible improvements to your pipeline
 
