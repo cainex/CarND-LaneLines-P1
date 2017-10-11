@@ -179,4 +179,15 @@ I believe there are a few shortcomings with the current pipeline:
 
    1. Processing time
 
-      Because this is implemented as a pipeline, I believe the pipe stages could be processed in parallel. This would incur an initial latency for the first lane lines to be 
+      Because this is implemented as a pipeline, I believe the pipe stages could be processed in parallel. This would incur an initial latency for the first lane lines to be detected, but the overall processing for a single thread could be reduced.
+
+   2. Reducing loss of lane line
+
+      To address the issue of losing lanes if they drift outside the region of interest too far, the region of interest could be made to be adaptive. We know that the delta between frames should be relatively small, so the region of interest could be recalibrated every frame using the detected lanes as the origin point. To further reduce noise, the geometry of the ROI could be changed to follow the particular lines as two polygons rather than a single polygon.
+
+      To mitigate the particular issue of losing lock on a lane line due to too many "garbage frames", and count of frames where new data was not able to be used could be tracked. If the count exceeded a low threshold, the "training" could be re-initiated.
+
+   3. Curves not lines
+      
+      It should be possible to use the initial stages of this pipeline, however, instead of fitting a line to the data, we could fit a curve. This would give of more precision to the lane line detection and allow for predicting upcoming turns sooner.
+       
